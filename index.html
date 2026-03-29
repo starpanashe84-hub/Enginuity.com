@@ -141,10 +141,114 @@
           <input type="text" class="digit-input" maxlength="1" data-index="4" inputmode="numeric" />
           <input type="text" class="digit-input" maxlength="1" data-index="5" inputmode="numeric" />
         </div>
-        <button class="btn-primary full-width" id="verifySubmit">Verify & Create Account</button>
-        <p class="resend-text" style="margin-top: 20px;">
-          Didn't receive a code? <a href="#" class="text-link" id="resendCode">Resend Code</a>
+        <button type="button" class="btn-primary full-width" id="verifySubmit" style="margin-top: 24px;">Verify & Create Account</button>
+        <p class="resend-text" style="margin-top: 24px;">
+          Didn't receive the code? <a href="#" class="text-link">Resend Code</a>
         </p>
+      </div>
+
+      <!-- Onboarding Pane -->
+      <div class="modal-pane hidden" id="onboardingPane">
+        <!-- Progress Bar -->
+        <div class="onboarding-progress">
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="onboardingProgress" style="width: 20%;"></div>
+          </div>
+          <span class="progress-label" id="onboardingStepLabel">Step 1 of 5</span>
+        </div>
+
+        <div class="onboarding-steps" id="onboardingSteps">
+          <!-- Step 1: Degree -->
+          <div class="onboarding-step active" data-step="1">
+            <h2 class="hero-title-mono" style="font-size: 1.5rem; margin-bottom: 12px;">What is your engineering degree?</h2>
+            <p style="margin-bottom: 24px;">Tell us what you're studying so we can curate your feed.</p>
+            <div class="form-group">
+              <select id="onboardingDegree" class="auth-select">
+                <option value="" disabled selected>Select your discipline</option>
+                <option value="mechanical">Mechanical Engineering</option>
+                <option value="electrical">Electrical Engineering</option>
+                <option value="civil">Civil & Structural Engineering</option>
+                <option value="computer">Computer Engineering</option>
+                <option value="aerospace">Aerospace Engineering</option>
+                <option value="mechatronics">Mechatronics & Robotics</option>
+                <option value="other">Other / General</option>
+              </select>
+            </div>
+            <button class="btn-primary" onclick="nextOnboardingStep()">Next Step</button>
+          </div>
+
+          <!-- Step 2: Difficulty -->
+          <div class="onboarding-step" data-step="2">
+            <h2 class="hero-title-mono" style="font-size: 1.5rem; margin-bottom: 12px;">What do you find most difficult?</h2>
+            <p style="margin-bottom: 24px;">Theoretical complexity? Practical application? Share the struggle.</p>
+            <div class="form-group">
+              <textarea id="onboardingDifficulty" rows="3" placeholder="I struggle with visualizing complex fluid dynamics equations..."></textarea>
+            </div>
+            <button class="btn-primary" onclick="nextOnboardingStep()">Next Step</button>
+          </div>
+
+          <!-- Step 3: Help -->
+          <div class="onboarding-step" data-step="3">
+            <h2 class="hero-title-mono" style="font-size: 1.5rem; margin-bottom: 12px;">How can Enginuity help?</h2>
+            <p style="margin-bottom: 24px;">What's the one thing that would make your studies effortless?</p>
+            <div class="form-group">
+              <textarea id="onboardingHelp" rows="3" placeholder="Better visual simulations and step-by-step AI problem solving..."></textarea>
+            </div>
+            <button class="btn-primary" onclick="nextOnboardingStep()">Next Step</button>
+          </div>
+
+          <!-- Step 4: Primary Goal -->
+          <div class="onboarding-step" data-step="4">
+            <h2 class="hero-title-mono" style="font-size: 1.5rem; margin-bottom: 12px;">Your primary goal today?</h2>
+            <p style="margin-bottom: 24px;">Let's customize your workspace for your current priority.</p>
+            <div class="goal-grid">
+              <label class="goal-option">
+                <input type="radio" name="onboardingGoal" value="exam" checked />
+                <span class="goal-box">Preparing for Exams</span>
+              </label>
+              <label class="goal-option">
+                <input type="radio" name="onboardingGoal" value="project" />
+                <span class="goal-box">Solving a Specific Project</span>
+              </label>
+              <label class="goal-option">
+                <input type="radio" name="onboardingGoal" value="career" />
+                <span class="goal-box">Career & Skills Development</span>
+              </label>
+              <label class="goal-option">
+                <input type="radio" name="onboardingGoal" value="curiosity" />
+                <span class="goal-box">General Curiosity</span>
+              </label>
+            </div>
+            <button class="btn-primary" onclick="nextOnboardingStep()" style="margin-top: 24px;">Next Step</button>
+          </div>
+
+          <!-- Step 5: Excitement -->
+          <div class="onboarding-step" data-step="5">
+            <h2 class="hero-title-mono" style="font-size: 1.5rem; margin-bottom: 12px;">Which branch excites you most?</h2>
+            <p style="margin-bottom: 24px;">This helps personalize your AI-powered suggestions.</p>
+            <div class="form-group">
+              <select id="onboardingInterest" class="auth-select">
+                <option value="" disabled selected>Select an area of interest</option>
+                <option value="ai">AI & Machine Learning</option>
+                <option value="renewable">Renewable Energy</option>
+                <option value="space">Space Exploration</option>
+                <option value="biomed">Biomedical Solutions</option>
+                <option value="nano">Nanotechnology</option>
+              </select>
+            </div>
+            <button class="btn-primary" onclick="completeOnboarding()">Complete Setup</button>
+          </div>
+
+          <!-- Final Welcome State -->
+          <div class="onboarding-step" id="welcomeStep">
+            <div class="welcome-visual" style="text-align: center; margin-bottom: 32px;">
+              <div class="ai-core" style="width: 80px; height: 80px; margin: 0 auto;"></div>
+            </div>
+            <h2 class="hero-title-mono" id="welcomeUserTitle" style="font-size: 2.2rem; margin-bottom: 12px; text-align: center;">Welcome StarP!</h2>
+            <p style="text-align: center; margin-bottom: 32px; font-size: 1.1rem;">Your personalised engineering ecosystem is ready. Ready to launch into the infinity of knowledge?</p>
+            <button class="btn-primary full-width" onclick="closeModal()">Launch Dashboard</button>
+          </div>
+        </div>
       </div>
 
     </div>

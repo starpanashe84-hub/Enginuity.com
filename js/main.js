@@ -185,12 +185,15 @@
     loginPane.classList.toggle('hidden', mode !== 'login');
     signupPane.classList.toggle('hidden', mode !== 'signup');
     verifyPane.classList.toggle('hidden', mode !== 'verify');
+    onboardingPane.classList.toggle('hidden', mode !== 'onboarding');
   }
 
   if (toSignupBtn) toSignupBtn.addEventListener('click', e => { e.preventDefault(); switchTab('signup'); });
   if (toLoginBtn)  toLoginBtn.addEventListener('click',  e => { e.preventDefault(); switchTab('login'); });
 
   /* ─── Form Submissions ──────────────────────────────────────── */
+  let userFirstName = 'StarP'; /* Default fallback */
+
   const loginForm  = document.getElementById('loginForm');
   const signupForm = document.getElementById('signupForm');
 
@@ -220,11 +223,11 @@
   if (signupForm) {
     signupForm.addEventListener('submit', e => {
       e.preventDefault();
-      const firstName = document.getElementById('firstName').value;
+      userFirstName   = document.getElementById('firstName').value;
       const email     = document.getElementById('signupEmail').value;
       const password  = document.getElementById('signupPassword').value;
 
-      if (!firstName || !email || !password) {
+      if (!userFirstName || !email || !password) {
         showToast('error', '⚠️', 'Please fill in all fields.');
         return;
       }
@@ -276,14 +279,59 @@
       setTimeout(() => {
         setLoading(verifySubmit, false);
         if (code === '123456') {
-          closeModal();
-          showToast('success', '🚀', `Account verified! Welcome to Enginuity.`);
+          /* Success -> Transition to Onboarding */
+          switchTab('onboarding');
+          startOnboarding();
+          showToast('success', '🔐', `Identity verified. Let's customise your experience.`);
         } else {
           showToast('error', '❌', 'Invalid verification code. Try 123456');
         }
       }, 1500);
     });
   }
+
+  /* ─── Onboarding Logic ──────────────────────────────────────── */
+  let currentOnboardingStep = 1;
+  const totalOnboardingSteps = 5;
+
+  function startOnboarding() {
+    currentOnboardingStep = 1;
+    updateOnboardingUI();
+  }
+
+  window.nextOnboardingStep = function() {
+    if (currentOnboardingStep < totalOnboardingSteps) {
+      currentOnboardingStep++;
+      updateOnboardingUI();
+    }
+  };
+
+  function updateOnboardingUI() {
+    const steps = document.querySelectorAll('.onboarding-step');
+    steps.forEach(step => {
+      const stepNum = parseInt(step.dataset.step, 10);
+      step.classList.toggle('active', stepNum === currentOnboardingStep);
+    });
+
+    const progress = (currentOnboardingStep / totalOnboardingSteps) * 100;
+    const bar = document.getElementById('onboardingProgress');
+    const label = document.getElementById('onboardingStepLabel');
+    
+    if (bar) bar.style.width = `${progress}%`;
+    if (label) label.textContent = `Step ${currentOnboardingStep} of ${totalOnboardingSteps}`;
+  }
+
+  window.completeOnboarding = function() {
+    /* Hide progress bar and show final welcome */
+    document.querySelector('.onboarding-progress').style.display = 'none';
+    const steps = document.querySelectorAll('.onboarding-step');
+    steps.forEach(s => s.classList.remove('active'));
+    
+    const welcomeStep = document.getElementById('welcomeStep');
+    const welcomeTitle = document.getElementById('welcomeUserTitle');
+    if (welcomeTitle) welcomeTitle.textContent = `Welcome ${userFirstName || 'StarP'}!`;
+    if (welcomeStep) welcomeStep.classList.add('active');
+  };
 
   /* ─── Password Toggle ───────────────────────────────────────── */
   document.querySelectorAll('.pass-toggle').forEach(btn => {
