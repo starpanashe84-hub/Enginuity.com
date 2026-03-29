@@ -6,9 +6,9 @@
 (function () {
   'use strict';
 
-  /* ── Supabase Initialization (Add your real keys here) ───────── */
-  const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-  const SUPABASE_KEY = 'YOUR_SUPABASE_ANON_KEY';
+  /* ── Supabase Initialization (Real Production Keys) ──────────── */
+  const SUPABASE_URL = 'https://hxsmpogukblbtxsxhyrl.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_QYICejDxTt446S4CKQCAzA_Y-bf8nXw';
   let supabase;
 
   /* Initialize Supabase if the script is loaded */
