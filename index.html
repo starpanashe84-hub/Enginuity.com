@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Enginuity — A personalised engineering learning ecosystem combining AI guidance, problem solving, design tools, and community collaboration. Built for engineering students who refuse to quit." />
+  <meta name="keywords" content="engineering, learning, AI, education, mechanical, electrical, civil, computer engineering" />
+  <title>Enginuity — Where Engineering Meets Infinity</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- ══════════════ NAVIGATION ══════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo" id="navLogo" aria-label="Enginuity Home">
+        <div class="logo-bh">
+          <div class="logo-bh-ring r1"></div>
+          <div class="logo-bh-ring r2"></div>
+          <div class="logo-bh-core"></div>
+        </div>
+        <span class="logo-text">Enginuity</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks" role="navigation" aria-label="Main navigation">
+        <li><a href="#home"         class="nav-link" data-section="home">Home</a></li>
+        <li><a href="#disciplines"  class="nav-link" data-section="disciplines">Disciplines</a></li>
+        <li><a href="#features"     class="nav-link" data-section="features">Features</a></li>
+        <li><a href="#how-it-works" class="nav-link" data-section="how-it-works">How It Works</a></li>
+        <li><a href="#community"    class="nav-link" data-section="community">Community</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="btn-ghost" id="loginBtn">Sign In</button>
+        <button class="btn-primary" id="signupBtn">Get Started</button>
+      </div>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══════════════ AUTH MODAL ══════════════ -->
+  <div class="modal-overlay" id="authModal" role="dialog" aria-modal="true" aria-label="Authentication">
+      <div class="modal-box">
+      <button class="modal-close" id="modalClose" aria-label="Close modal">✕</button>
+
+      <!-- Login Pane -->
+      <div class="modal-pane" id="loginPane">
+        <div class="modal-header">
+          <h2 class="hero-title-mono" style="font-size: 2rem; margin-bottom: 8px;">Sign In</h2>
+          <p>Keep it all together and you'll be fine</p>
+        </div>
+        <form class="auth-form" id="loginForm" novalidate>
+          <div class="form-group">
+            <label for="loginEmail">Email Address</label>
+            <input type="email" id="loginEmail" placeholder="engineer@university.edu" autocomplete="email" required />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <div class="input-wrap">
+              <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password" required />
+              <button type="button" class="pass-toggle" data-target="loginPassword">Show</button>
+            </div>
+          </div>
+          <div class="form-options">
+            <a href="#" class="text-link" style="opacity: 0.6; font-size: 0.75rem;">Forgot Password</a>
+          </div>
+          <button type="submit" class="btn-primary full-width" id="loginSubmit">Sign In</button>
+          <div class="form-divider"><span>or</span></div>
+          <button type="button" class="social-btn full-width" id="appleBtn" style="width: 100%; font-size: 0.85rem;">
+               <svg width="16" height="16" viewBox="0 0 24 24" fill="white" style="margin-right: 8px;"><path d="M17.057 12.012c.005 2.155 1.77 2.872 1.79 2.88-.016.052-.28 0.958-.916 1.886-.548.802-1.121 1.602-2.022 1.618-.887.014-1.173-.526-2.185-.526-1.011 0-1.328.51-2.17.543-.872.032-1.528-.863-2.08-1.66-.113-.163-.223-.332-.326-.497-1.121-1.802-1.97-5.09-1.393-5.09.417-1.802 2.261-2.94 4.01-2.956.887-.015 1.723.593 2.266.593.543 0 1.543-.726 2.597-.611.442.018 1.684.179 2.484 1.344-.065.04-1.48.86-1.475 2.576zM14.908 6.471c.465-.558.775-1.332.689-2.108-.667.027-1.472.443-1.949 1.002-.428.497-.803 1.288-.702 2.046.743.058 1.498-.382 1.962-.94z"/></svg>
+               Sign in with Apple
+          </button>
+        </form>
+        <p class="resend-text" style="margin-top: 24px;">
+          New to Enginuity? <a href="#" class="text-link" id="toSignup">Join Now</a>
+        </p>
+      </div>
+
+      <!-- Signup Pane -->
+      <div class="modal-pane hidden" id="signupPane">
+        <div class="modal-header">
+          <h2 class="hero-title-mono" style="font-size: 2rem; margin-bottom: 8px;">Join Now</h2>
+          <p>The journey of a thousand miles begins here</p>
+        </div>
+        <form class="auth-form" id="signupForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" placeholder="John" required />
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" placeholder="Doe" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="signupEmail">University Email</label>
+            <input type="email" id="signupEmail" placeholder="engineer@university.edu" required />
+          </div>
+          <div class="form-group">
+            <label for="signupPassword">Password</label>
+            <div class="input-wrap">
+              <input type="password" id="signupPassword" placeholder="Create a strong password" required />
+              <button type="button" class="pass-toggle" data-target="signupPassword">Show</button>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary full-width" id="signupSubmit" style="margin-top: 10px;">Create Account</button>
+        </form>
+        <p class="resend-text" style="margin-top: 24px;">
+          Already have an account? <a href="#" class="text-link" id="toLogin">Sign In</a>
+        </p>
+      </div>
+
+      <!-- Verification Pane -->
+      <div class="modal-pane hidden" id="verifyPane">
+        <div class="modal-header">
+          <h2 class="hero-title-mono" style="font-size: 1.8rem; margin-bottom: 8px;">Verification</h2>
+          <p id="verifyText">We sent a 6-digit code to your email</p>
+        </div>
+        <div class="verify-grid">
+          <input type="text" class="digit-input" maxlength="1" data-index="0" inputmode="numeric" />
+          <input type="text" class="digit-input" maxlength="1" data-index="1" inputmode="numeric" />
+          <input type="text" class="digit-input" maxlength="1" data-index="2" inputmode="numeric" />
+          <input type="text" class="digit-input" maxlength="1" data-index="3" inputmode="numeric" />
+          <input type="text" class="digit-input" maxlength="1" data-index="4" inputmode="numeric" />
+          <input type="text" class="digit-input" maxlength="1" data-index="5" inputmode="numeric" />
+        </div>
+        <button class="btn-primary full-width" id="verifySubmit">Verify & Create Account</button>
+        <p class="resend-text" style="margin-top: 20px;">
+          Didn't receive a code? <a href="#" class="text-link" id="resendCode">Resend Code</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════ HERO ══════════════ -->
+  <section class="hero" id="home">
+
+    <!-- Singularity background image -->
+    <div class="hero-bg-img" aria-hidden="true"></div>
+
+    <!-- Dark vignette overlay for text readability -->
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <!-- Stars canvas -->
+    <canvas class="particle-canvas" id="particleCanvas" aria-hidden="true"></canvas>
+
+    <!-- Centered content -->
+    <div class="hero-center">
+      <div class="mono-badge">
+        <span class="badge-dot-mono"></span>
+        <span>AI-Powered &middot; Community-Driven &middot; Free For Students</span>
+      </div>
+
+      <h1 class="hero-giant-title">ENGINUITY</h1>
+
+      <p class="hero-tagline">Where Engineering Meets Infinity</p>
+
+      <p class="hero-sub">
+        The personalised learning ecosystem built for engineering students.<br />
+        Conquer complex theory, solve real problems, and grow with a community<br />
+        that truly understands the grind.
+      </p>
+
+      <div class="hero-cta">
+        <button class="btn-primary large" id="heroGetStarted">Start Learning Free</button>
+        <a href="#disciplines" class="btn-outline large" id="heroExplore">
+          <span>⚡</span> Explore Disciplines
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num" data-target="15">0</span><span class="stat-suf">+</span>
+          <span class="stat-lbl">Disciplines</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-item">
+          <span class="stat-num" data-target="2500">0</span><span class="stat-suf">+</span>
+          <span class="stat-lbl">Problems</span>
+        </div>
+        <div class="stat-sep"></div>
+        <div class="stat-item">
+          <span class="stat-num" data-target="12000">0</span><span class="stat-suf">+</span>
+          <span class="stat-lbl">Students</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="scroll-hint" aria-label="Scroll down">
+      <div class="scroll-line-wrap"><div class="scroll-line"></div></div>
+      <span>Scroll to explore</span>
+    </div>
+  </section>
+
+  <!-- ══════════════ MISSION ══════════════ -->
+  <section class="mission" id="about">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="sec-tag">Our Mission</span>
+        <h2>Engineering is brutal.<br /><span class="text-gold">We make it possible.</span></h2>
+        <p class="sec-desc">
+          Enginuity was born from the reality that engineering is among the most demanding academic journeys.
+          We combine AI guidance, curated problems, design tools, and community support — so you don't just survive, you thrive.
+        </p>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card glass-card reveal">
+          <div class="pillar-icon">🧠</div>
+          <h3>Personalised AI</h3>
+          <p>Your AI tutor adapts to your learning style, identifies knowledge gaps, and builds a custom study plan.</p>
+        </div>
+        <div class="pillar-card glass-card reveal" style="--reveal-delay: 0.1s">
+          <div class="pillar-icon">⚙️</div>
+          <h3>Applied Problems</h3>
+          <p>Over 2,500 real engineering problems across all disciplines with guided step-by-step solutions.</p>
+        </div>
+        <div class="pillar-card glass-card reveal" style="--reveal-delay: 0.2s">
+          <div class="pillar-icon">📐</div>
+          <h3>Design Studio</h3>
+          <p>Built-in calculators, circuit simulators, stress analysers, and free-body diagram tools — all in your browser.</p>
+        </div>
+        <div class="pillar-card glass-card reveal" style="--reveal-delay: 0.3s">
+          <div class="pillar-icon">🤝</div>
+          <h3>Community</h3>
+          <p>Study groups, peer-to-peer learning, expert Q&amp;A sessions, and a global engineering student network.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ DISCIPLINES ══════════════ -->
+  <section class="disciplines" id="disciplines">
+    <div class="disciplines-bg" aria-hidden="true"></div>
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="sec-tag">Disciplines</span>
+        <h2>Every Branch of<br /><span class="text-gold">Engineering</span></h2>
+        <p class="sec-desc">From aerospace to biomedical — curated content, AI guidance, and thousands of problems for every major engineering field.</p>
+      </div>
+      <div class="disciplines-grid" id="disciplinesGrid">
+        <!-- Populated by disciplines.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ FEATURES ══════════════ -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="sec-tag">Platform Features</span>
+        <h2>Everything you need<br /><span class="text-gold">to excel</span></h2>
+      </div>
+
+      <div class="features-layout">
+        <!-- Main Feature: AI -->
+        <div class="feat-main glass-card reveal">
+          <div class="feat-visual">
+            <div class="ai-orb">
+              <div class="ai-core"></div>
+              <div class="ai-ring ar1"></div>
+              <div class="ai-ring ar2"></div>
+              <div class="ai-ring ar3"></div>
+              <div class="ai-particle ap1"></div>
+              <div class="ai-particle ap2"></div>
+              <div class="ai-particle ap3"></div>
+              <div class="ai-particle ap4"></div>
+            </div>
+          </div>
+          <div class="feat-text">
+            <span class="feat-badge">Core Feature</span>
+            <h3>🧠 AI Engineering Guide</h3>
+            <p>Your personal AI tutor understands engineering theory at a graduate level. Ask questions, get detailed explanations, request worked examples — available 24/7.</p>
+            <ul class="feat-list">
+              <li>✦ Adaptive difficulty progression</li>
+              <li>✦ Multi-step problem solving walkthroughs</li>
+              <li>✦ Discipline-specific knowledge bases</li>
+              <li>✦ Natural language Q&amp;A explanations</li>
+            </ul>
+            <button class="btn-outline" id="tryAiBtn">Try AI Guide →</button>
+          </div>
+        </div>
+
+        <!-- Side Feature Cards -->
+        <div class="feat-side">
+          <div class="feat-card glass-card reveal" style="--reveal-delay: 0.05s">
+            <div class="feat-card-icon">⚙️</div>
+            <div>
+              <h4>Problem Database</h4>
+              <p>2,500+ curated problems across 15 disciplines with fully worked solutions and difficulty ratings.</p>
+            </div>
+          </div>
+          <div class="feat-card glass-card reveal" style="--reveal-delay: 0.15s">
+            <div class="feat-card-icon">📐</div>
+            <div>
+              <h4>Design Studio</h4>
+              <p>Engineering calculators, circuit builders, stress analysers, and lightweight CAD drawing tools.</p>
+            </div>
+          </div>
+          <div class="feat-card glass-card reveal" style="--reveal-delay: 0.25s">
+            <div class="feat-card-icon">🤝</div>
+            <div>
+              <h4>Study Groups</h4>
+              <p>Form squads, schedule sessions, collaborate on problems, and review each other's work in real time.</p>
+            </div>
+          </div>
+          <div class="feat-card glass-card reveal" style="--reveal-delay: 0.35s">
+            <div class="feat-card-icon">📊</div>
+            <div>
+              <h4>Progress Tracker</h4>
+              <p>Visual dashboards showing your mastery levels, problem streaks, and the areas that need attention.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ HOW IT WORKS ══════════════ -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="sec-tag">The Process</span>
+        <h2>How <span class="text-gold">Enginuity</span> Works</h2>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-track" aria-hidden="true"></div>
+
+        <div class="timeline-step reveal">
+          <div class="step-num">01</div>
+          <div class="step-card glass-card">
+            <div class="step-icon">🎯</div>
+            <h3>Choose Your Discipline</h3>
+            <p>Select your primary engineering field and sub-topics. Tell us your year of study and current course modules.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step reveal" style="--reveal-delay: 0.12s">
+          <div class="step-num">02</div>
+          <div class="step-card glass-card">
+            <div class="step-icon">🤖</div>
+            <h3>AI Assesses Your Level</h3>
+            <p>A short diagnostic challenge lets our AI map your current knowledge — identifying strengths and pinpointing gaps.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step reveal" style="--reveal-delay: 0.24s">
+          <div class="step-num">03</div>
+          <div class="step-card glass-card">
+            <div class="step-icon">⚡</div>
+            <h3>Solve Guided Problems</h3>
+            <p>Work through problems at your level with step-by-step AI guidance, hints, visual aids, and full solutions.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step reveal" style="--reveal-delay: 0.36s">
+          <div class="step-num">04</div>
+          <div class="step-card glass-card">
+            <div class="step-icon">🚀</div>
+            <h3>Collaborate &amp; Grow</h3>
+            <p>Join the community, compare solutions, ask experts, and watch your engineering confidence compound every day.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ COMMUNITY ══════════════ -->
+  <section class="community" id="community">
+    <div class="community-bg" aria-hidden="true"></div>
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="sec-tag">Community</span>
+        <h2>Engineers who<br /><span class="text-gold">persevere together</span></h2>
+        <p class="sec-desc">Join thousands of engineering students who have transformed their academic experience with Enginuity.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testi-card glass-card reveal">
+          <div class="stars">★★★★★</div>
+          <p class="testi-quote">"The AI guide explained thermodynamics in a way my lecturer never could. I went from barely passing to acing my exams in one semester."</p>
+          <div class="testi-author">
+            <div class="author-av" data-initials="KN" style="--av-hue: 35"></div>
+            <div>
+              <strong>Kwame N.</strong>
+              <span>Mechanical Engineering, Year 3</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card glass-card reveal" style="--reveal-delay: 0.1s">
+          <div class="stars">★★★★★</div>
+          <p class="testi-quote">"The problem database is incredible. 2,500+ problems with full solutions — it's like the world's best engineering textbook, but actually useful."</p>
+          <div class="testi-author">
+            <div class="author-av" data-initials="SP" style="--av-hue: 200"></div>
+            <div>
+              <strong>Siya P.</strong>
+              <span>Electrical Engineering, Year 2</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card glass-card reveal" style="--reveal-delay: 0.2s">
+          <div class="stars">★★★★★</div>
+          <p class="testi-quote">"I was about to drop out. Enginuity helped me find a study group and finally understand structural analysis. Now I'm top of my class."</p>
+          <div class="testi-author">
+            <div class="author-av" data-initials="AR" style="--av-hue: 140"></div>
+            <div>
+              <strong>Amara R.</strong>
+              <span>Civil Engineering, Year 4</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ CTA / JOIN ══════════════ -->
+  <section class="cta-join" id="join">
+    <div class="cta-ambient" aria-hidden="true"></div>
+    <div class="container">
+      <div class="cta-inner reveal">
+        <div class="cta-bh" aria-hidden="true">
+          <div class="cbh-ring cr1"></div>
+          <div class="cbh-ring cr2"></div>
+          <div class="cbh-core"></div>
+          <div class="cbh-flare"></div>
+        </div>
+        <h2>Begin Your<br /><span class="text-gold">Engineering Journey</span></h2>
+        <p>Join 12,000+ engineering students who chose Enginuity.<br />Your potential is limitless — we're here to unlock it.</p>
+        <div class="cta-form">
+          <input type="email" id="ctaEmail" placeholder="Enter your university email..." aria-label="Email address" />
+          <button class="btn-primary" id="ctaSignupBtn">Get Started Free</button>
+        </div>
+        <p class="cta-note">Free for students · No credit card required · Cancel anytime</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ FOOTER ══════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="fl-bh">
+              <div class="fl-ring r1"></div>
+              <div class="fl-ring r2"></div>
+              <div class="fl-core"></div>
+            </div>
+            <span>Enginuity</span>
+          </div>
+          <p>Where engineering meets infinity. Built for students who refuse to quit.</p>
+          <div class="social-bar">
+            <a href="#" class="soc-icon" aria-label="Twitter / X">𝕏</a>
+            <a href="#" class="soc-icon" aria-label="LinkedIn">in</a>
+            <a href="#" class="soc-icon" aria-label="GitHub">⌥</a>
+            <a href="#" class="soc-icon" aria-label="Discord">◎</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <ul>
+            <li><a href="#">Problem Database</a></li>
+            <li><a href="#">AI Guide</a></li>
+            <li><a href="#">Design Studio</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Progress Tracker</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Disciplines</h4>
+          <ul>
+            <li><a href="#">Electrical</a></li>
+            <li><a href="#">Mechanical</a></li>
+            <li><a href="#">Civil</a></li>
+            <li><a href="#">Computer</a></li>
+            <li><a href="#">View all 15 →</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Enginuity. All rights reserved. Built with ∞ for engineering students everywhere.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/particles.js"></script>
+  <script src="js/disciplines.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

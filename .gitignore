@@ -1,0 +1,8 @@
+.gemini/
+node_modules/
+temp/
+*.log
+.DS_Store
+Thumbs.db
+launch.ps1
+.vscode/

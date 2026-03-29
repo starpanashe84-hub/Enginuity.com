@@ -1,0 +1,243 @@
+/* ═══════════════════════════════════════════════════════════════
+   ENGINUITY — animations.css
+   All @keyframe definitions and scroll reveal classes
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Black Hole ──────────────────────────────────────────────── */
+@keyframes bhAmb {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50%       { opacity: 1.0; transform: scale(1.06); }
+}
+
+@keyframes haloSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes ringPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 20px rgba(245,166,35,0.3),
+      0 0 50px rgba(245,166,35,0.12),
+      inset 0 0 20px rgba(245,166,35,0.08);
+  }
+  50% {
+    box-shadow:
+      0 0 30px rgba(245,166,35,0.5),
+      0 0 80px rgba(245,166,35,0.2),
+      inset 0 0 30px rgba(245,166,35,0.14);
+  }
+}
+
+@keyframes diskSpin {
+  from { transform: rotate(0deg) scaleY(0.22); }
+  to   { transform: rotate(360deg) scaleY(0.22); }
+}
+
+@keyframes logoSpin1 {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Orbit dots around black hole */
+@keyframes orbitDot1 {
+  0%   { transform: rotate(0deg) translateX(155px)   rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(155px) rotate(-360deg); }
+}
+@keyframes orbitDot2 {
+  0%   { transform: rotate(0deg) translateX(120px)   rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(120px) rotate(-360deg); }
+}
+
+/* ── AI Orb ──────────────────────────────────────────────────── */
+@keyframes aiCorePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow:
+      0 0 20px rgba(245,166,35,0.8),
+      0 0 50px rgba(245,166,35,0.4),
+      0 0 100px rgba(245,166,35,0.2);
+  }
+  50% {
+    transform: scale(1.12);
+    box-shadow:
+      0 0 30px rgba(245,166,35,1),
+      0 0 80px rgba(245,166,35,0.6),
+      0 0 140px rgba(245,166,35,0.3);
+  }
+}
+
+@keyframes aiRingSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes aiParticle1 {
+  0%   { transform: rotate(0deg) translateX(53px)   rotate(0deg); opacity: 1; }
+  50%  { opacity: 0.4; }
+  100% { transform: rotate(360deg) translateX(53px) rotate(-360deg); opacity: 1; }
+}
+@keyframes aiParticle2 {
+  0%   { transform: rotate(90deg) translateX(65px)   rotate(-90deg); opacity: 0.6; }
+  50%  { opacity: 1; }
+  100% { transform: rotate(450deg) translateX(65px) rotate(-450deg); opacity: 0.6; }
+}
+
+/* ── Logo / Mini BH ──────────────────────────────────────────── */
+@keyframes mBhSpin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── CTA Glow ────────────────────────────────────────────────── */
+@keyframes ctaGlow {
+  0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.08); }
+}
+
+/* ── Badge / Indicator ───────────────────────────────────────── */
+@keyframes badgePulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(245,166,35,0.7), 0 0 8px rgba(245,166,35,0.5);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(245,166,35,0), 0 0 12px rgba(245,166,35,0.8);
+    transform: scale(1.15);
+  }
+}
+
+/* Monochrome badge pulse for hero */
+@keyframes badgeMonoPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255,255,255,0.4);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+    box-shadow: 0 0 0 4px rgba(255,255,255,0);
+  }
+}
+
+/* ── Scroll Indicator ────────────────────────────────────────── */
+@keyframes scrollLine {
+  0%   { transform: translateY(-100%); opacity: 0; }
+  30%  { opacity: 1; }
+  70%  { opacity: 1; }
+  100% { transform: translateY(200%); opacity: 0; }
+}
+
+@keyframes scrollFade {
+  0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+  50%       { opacity: 0.9; transform: translateX(-50%) translateY(4px); }
+}
+
+/* ── General Entrance ────────────────────────────────────────── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Giant hero title cinematic entrance */
+@keyframes heroTitleIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+    letter-spacing: 0.25em;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    letter-spacing: 0.14em;
+  }
+}
+
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Modal ───────────────────────────────────────────────────── */
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Shimmer ─────────────────────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── Floating ────────────────────────────────────────────────── */
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-12px); }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   SCROLL REVEAL SYSTEM
+───────────────────────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero content animates in on load */
+.hero-content > * {
+  animation: fadeUp 0.7s var(--ease-out) both;
+}
+.hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+.hero-content > *:nth-child(2) { animation-delay: 0.2s; }
+.hero-content > *:nth-child(3) { animation-delay: 0.35s; }
+.hero-content > *:nth-child(4) { animation-delay: 0.48s; }
+.hero-content > *:nth-child(5) { animation-delay: 0.6s; }
+
+.hero-visual {
+  animation: scaleUp 1s var(--ease-out) 0.5s both;
+}
+
+/* .scroll-hint keyframes defined in style.css */
+
+/* ── Disc card stagger (set via JS) ──────────────────────────── */
+.disc-card {
+  animation: fadeUp 0.5s var(--ease-out) both;
+}
