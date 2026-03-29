@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Enginuity</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body { background: #000; overflow-x: hidden; }
+    .dash-container {
+      min-height: 100vh;
+      padding: 120px 20px 60px;
+      position: relative;
+      z-index: 10;
+    }
+    .dash-hero {
+      max-width: var(--container-xl);
+      margin: 0 auto;
+      text-align: left;
+    }
+    .welcome-text {
+      font-size: 3.5rem;
+      margin-bottom: 12px;
+      letter-spacing: -2px;
+    }
+    .dash-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--gap-lg);
+      margin-top: 60px;
+    }
+    .dash-card {
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      cursor: none;
+    }
+    .dash-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(245,166,35,0.05), transparent);
+    }
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 24px;
+      display: block;
+    }
+    .card-tag {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--gold-400);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .dash-bg {
+      position: fixed;
+      inset: 0;
+      background: url('assets/singularity-bg.png') center/cover no-repeat;
+      opacity: 0.4;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .nav-dash {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 32px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+      z-index: 100;
+    }
+    .logout-btn {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-3);
+      cursor: none;
+      transition: color 0.3s ease;
+    }
+    .logout-btn:hover { color: var(--gold-300); }
+  </style>
+</head>
+<body>
+  <div class="dash-bg"></div>
+
+  <nav class="nav-dash">
+    <a href="index.html" class="logo">
+      <div class="logo-orb"></div>
+      <span class="logo-text">Enginuity</span>
+    </a>
+    <button class="logout-btn" id="logoutBtn">SIGN_OUT [0x01]</button>
+  </nav>
+
+  <main class="dash-container">
+    <div class="dash-hero">
+      <span class="sec-tag reveal">Access Granted</span>
+      <h1 class="welcome-text hero-title reveal">Welcome home,<br /><span class="text-gold" id="userName">Engineer</span>.</h1>
+      <p class="sec-desc reveal" style="max-width: 600px;">Your personalised engineering ecosystem is online. Revisit your modules or explore new disciplines to accelerate your growth.</p>
+
+      <div class="dash-grid">
+        <div class="dash-card glass-card reveal" style="--reveal-delay: 0.1s">
+          <span class="card-tag">Resume Study</span>
+          <span class="card-icon">📚</span>
+          <h3>Thermodynamics I</h3>
+          <p style="font-size: 0.9rem; opacity: 0.7;">Last active: 2 hours ago. You were exploring Heat Engines.</p>
+          <button class="btn-primary" style="margin-top: 24px; font-size: 0.75rem; padding: 10px 20px;">Open Module</button>
+        </div>
+
+        <div class="dash-card glass-card reveal" style="--reveal-delay: 0.2s">
+          <span class="card-tag">AI Tasks</span>
+          <span class="card-icon">🤖</span>
+          <h3>Curated Problem Set</h3>
+          <p style="font-size: 0.9rem; opacity: 0.7;">AI has identified 3 gaps in your Civil Structure knowledge.</p>
+          <button class="btn-primary" style="margin-top: 24px; font-size: 0.75rem; padding: 10px 20px;">Start Practice</button>
+        </div>
+
+        <div class="dash-card glass-card reveal" style="--reveal-delay: 0.3s">
+          <span class="card-tag">Community</span>
+          <span class="card-icon">⚡</span>
+          <h3>Global Hub</h3>
+          <p style="font-size: 0.9rem; opacity: 0.7;">34 active discussions in your branch of interest.</p>
+          <button class="btn-primary" style="margin-top: 24px; font-size: 0.75rem; padding: 10px 20px;">Join Chat</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-blob" id="cursorBlob"></div>
+
+  <script src="js/main.js"></script>
+  <script>
+    /* Dashboard specific greeting */
+    const name = localStorage.getItem('userFirstName') || 'Engineer';
+    document.getElementById('userName').textContent = name;
+
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('userFirstName');
+        window.location.href = 'index.html';
+      });
+    }
+
+    /* Simple intersection observer for reveals in dashboard */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) entry.target.classList.add('active');
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

@@ -81,11 +81,18 @@
             <a href="#" class="text-link" style="opacity: 0.6; font-size: 0.75rem;">Forgot Password</a>
           </div>
           <button type="submit" class="btn-primary full-width" id="loginSubmit">Sign In</button>
-          <div class="form-divider"><span>or</span></div>
-          <button type="button" class="social-btn full-width" id="appleBtn" style="width: 100%; font-size: 0.85rem;">
-               <svg width="16" height="16" viewBox="0 0 24 24" fill="white" style="margin-right: 8px;"><path d="M17.057 12.012c.005 2.155 1.77 2.872 1.79 2.88-.016.052-.28 0.958-.916 1.886-.548.802-1.121 1.602-2.022 1.618-.887.014-1.173-.526-2.185-.526-1.011 0-1.328.51-2.17.543-.872.032-1.528-.863-2.08-1.66-.113-.163-.223-.332-.326-.497-1.121-1.802-1.97-5.09-1.393-5.09.417-1.802 2.261-2.94 4.01-2.956.887-.015 1.723.593 2.266.593.543 0 1.543-.726 2.597-.611.442.018 1.684.179 2.484 1.344-.065.04-1.48.86-1.475 2.576zM14.908 6.471c.465-.558.775-1.332.689-2.108-.667.027-1.472.443-1.949 1.002-.428.497-.803 1.288-.702 2.046.743.058 1.498-.382 1.962-.94z"/></svg>
-               Sign in with Apple
-          </button>
+          <div class="form-divider"><span>or securely sign in with</span></div>
+          <div class="social-grid">
+            <button type="button" class="social-btn" id="googleBtn" title="Continue with Google">
+               <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#EA4335" d="M12.48 10.92v3.28h7.84c-.24 1.84-.96 3.4-1.92 4.48-1.52 1.52-3.84 2.12-5.92 2.12-4.12 0-7.44-3.32-7.44-7.44s3.32-7.44 7.44-7.44c2.24 0 4.16.84 5.6 2.24l2.56-2.56C18.44 3.48 15.68 2.36 12.48 2.36 6.68 2.36 2 7.04 2 12.84s4.68 10.48 10.48 10.48c3.12 0 5.64-1.04 7.68-3.12 2-2 2.72-4.88 2.72-7.28 0-.52-.04-1.04-.12-1.52H12.48z"/></svg> Google
+            </button>
+            <button type="button" class="social-btn" id="appleBtn" title="Continue with Apple">
+               <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.057 12.012c.005 2.155 1.77 2.872 1.79 2.88-.016.052-.28 0.958-.916 1.886-.548.802-1.121 1.602-2.022 1.618-.887.014-1.173-.526-2.185-.526-1.011 0-1.328.51-2.17.543-.872.032-1.528-.863-2.08-1.66-.113-.163-.223-.332-.326-.497-1.121-1.802-1.97-5.09-1.393-5.09.417-1.802 2.261-2.94 4.01-2.956.887-.015 1.723.593 2.266.593.543 0 1.543-.726 2.597-.611.442.018 1.684.179 2.484 1.344-.065.04-1.48.86-1.475 2.576zM14.908 6.471c.465-.558.775-1.332.689-2.108-.667.027-1.472.443-1.949 1.002-.428.497-.803 1.288-.702 2.046.743.058 1.498-.382 1.962-.94z"/></svg> Apple
+            </button>
+            <button type="button" class="social-btn" id="msBtn" title="Continue with Microsoft">
+               <svg width="18" height="18" viewBox="0 0 23 23"><path fill="#f3f3f3" d="M0 0h11v11H0z"/><path fill="#f3f3f3" d="M12 0h11v11H12z"/><path fill="#f3f3f3" d="M0 12h11v11H0z"/><path fill="#f3f3f3" d="M12 12h11v11H12z"/></svg> Microsoft
+            </button>
+          </div>
         </form>
         <p class="resend-text" style="margin-top: 24px;">
           New to Enginuity? <a href="#" class="text-link" id="toSignup">Join Now</a>
@@ -121,6 +128,18 @@
             </div>
           </div>
           <button type="submit" class="btn-primary full-width" id="signupSubmit" style="margin-top: 10px;">Create Account</button>
+          <div class="form-divider"><span>or securely sign up with</span></div>
+          <div class="social-grid">
+            <button type="button" class="social-btn" id="googleBtn" title="Continue with Google">
+               <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#EA4335" d="M12.48 10.92v3.28h7.84c-.24 1.84-.96 3.4-1.92 4.48-1.52 1.52-3.84 2.12-5.92 2.12-4.12 0-7.44-3.32-7.44-7.44s3.32-7.44 7.44-7.44c2.24 0 4.16.84 5.6 2.24l2.56-2.56C18.44 3.48 15.68 2.36 12.48 2.36 6.68 2.36 2 7.04 2 12.84s4.68 10.48 10.48 10.48c3.12 0 5.64-1.04 7.68-3.12 2-2 2.72-4.88 2.72-7.28 0-.52-.04-1.04-.12-1.52H12.48z"/></svg> Google
+            </button>
+            <button type="button" class="social-btn" id="appleBtn" title="Continue with Apple">
+               <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.057 12.012c.005 2.155 1.77 2.872 1.79 2.88-.016.052-.28 0.958-.916 1.886-.548.802-1.121 1.602-2.022 1.618-.887.014-1.173-.526-2.185-.526-1.011 0-1.328.51-2.17.543-.872.032-1.528-.863-2.08-1.66-.113-.163-.223-.332-.326-.497-1.121-1.802-1.97-5.09-1.393-5.09.417-1.802 2.261-2.94 4.01-2.956.887-.015 1.723.593 2.266.593.543 0 1.543-.726 2.597-.611.442.018 1.684.179 2.484 1.344-.065.04-1.48.86-1.475 2.576zM14.908 6.471c.465-.558.775-1.332.689-2.108-.667.027-1.472.443-1.949 1.002-.428.497-.803 1.288-.702 2.046.743.058 1.498-.382 1.962-.94z"/></svg> Apple
+            </button>
+            <button type="button" class="social-btn" id="msBtn" title="Continue with Microsoft">
+               <svg width="18" height="18" viewBox="0 0 23 23"><path fill="#f3f3f3" d="M0 0h11v11H0z"/><path fill="#f3f3f3" d="M12 0h11v11H12z"/><path fill="#f3f3f3" d="M0 12h11v11H0z"/><path fill="#f3f3f3" d="M12 12h11v11H12z"/></svg> Microsoft
+            </button>
+          </div>
         </form>
         <p class="resend-text" style="margin-top: 24px;">
           Already have an account? <a href="#" class="text-link" id="toLogin">Sign In</a>

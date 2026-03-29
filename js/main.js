@@ -6,6 +6,21 @@
 (function () {
   'use strict';
 
+  /* ── Supabase Initialization (Add your real keys here) ───────── */
+  const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+  const SUPABASE_KEY = 'YOUR_SUPABASE_ANON_KEY';
+  let supabase;
+
+  /* Initialize Supabase if the script is loaded */
+  if (window.supabase) {
+    try {
+      supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      console.log('🚀 Supabase Ready');
+    } catch (e) {
+      console.warn('⚠️ Supabase connection failed. Check your credentials.');
+    }
+  }
+
   /* ════════════════════════════════════════════════════════════
      CUSTOM CURSOR
   ════════════════════════════════════════════════════════════ */
@@ -126,15 +141,23 @@
   });
 
   /* ════════════════════════════════════════════════════════════
-     AUTH MODAL
+     AUTH MODAL & PANES
   ════════════════════════════════════════════════════════════ */
   const modal       = document.getElementById('authModal');
   const modalClose  = document.getElementById('modalClose');
   const loginPane   = document.getElementById('loginPane');
   const signupPane  = document.getElementById('signupPane');
   const verifyPane  = document.getElementById('verifyPane');
+  const onboardingPane = document.getElementById('onboardingPane');
   const toSignupBtn = document.getElementById('toSignup');
   const toLoginBtn  = document.getElementById('toLogin');
+
+  /* Social Buttons */
+  const socialBtns = {
+    google: document.getElementById('googleBtn'),
+    apple:  document.getElementById('appleBtn'),
+    ms:     document.getElementById('msBtn'),
+  };
 
   /* Openers */
   const openers = {
@@ -143,37 +166,34 @@
   };
 
   function openModal(mode) {
+    if (!modal) return;
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
     switchTab(mode || 'login');
-    setTimeout(() => {
-      const activePane = mode === 'signup' ? signupPane : loginPane;
-      const first = activePane.querySelector('input:not([type="checkbox"])');
-      if (first) first.focus();
-    }, 400);
   }
 
   function closeModal() {
+    if (!modal) return;
     modal.classList.remove('active');
     document.body.style.overflow = '';
   }
 
-  openers.login.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('click', () => openModal('login'));
-  });
-
-  openers.signup.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('click', () => openModal('signup'));
-  });
-
   if (modalClose) modalClose.addEventListener('click', closeModal);
 
-  /* Close on overlay click */
-  modal.addEventListener('click', e => {
-    if (e.target === modal) closeModal();
+  /* Modal Openers */
+  Object.keys(openers).forEach(mode => {
+    openers[mode].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('click', () => openModal(mode));
+    });
   });
+
+  /* Close on overlay click */
+  if (modal) {
+    modal.addEventListener('click', e => {
+      if (e.target === modal) closeModal();
+    });
+  }
 
   /* Close on Escape */
   document.addEventListener('keydown', e => {
@@ -191,37 +211,29 @@
   if (toSignupBtn) toSignupBtn.addEventListener('click', e => { e.preventDefault(); switchTab('signup'); });
   if (toLoginBtn)  toLoginBtn.addEventListener('click',  e => { e.preventDefault(); switchTab('login'); });
 
+  /* ─── Social Login Actions ─────────────────────────────────── */
+  function handleSocialLogin(provider) {
+    if (!supabase) {
+      showToast('error', '⚠️', 'Supabase not connected. Please add your API keys.');
+      return;
+    }
+    showToast('info', '🛰️', `Redirecting to ${provider}...`);
+    /* In a real setup: supabase.auth.signInWithOAuth({ provider: provider }); */
+  }
+
+  ['google', 'apple', 'ms'].forEach(p => {
+    const btn = document.getElementById(p + 'Btn');
+    if (btn) btn.addEventListener('click', () => handleSocialLogin(p));
+  });
+
   /* ─── Form Submissions ──────────────────────────────────────── */
-  let userFirstName = 'StarP'; /* Default fallback */
+  let userFirstName = localStorage.getItem('userFirstName') || 'Engineer';
 
   const loginForm  = document.getElementById('loginForm');
   const signupForm = document.getElementById('signupForm');
 
-  if (loginForm) {
-    loginForm.addEventListener('submit', e => {
-      e.preventDefault();
-      const email    = document.getElementById('loginEmail').value;
-      const password = document.getElementById('loginPassword').value;
-
-      if (!email || !password) {
-        showToast('error', '⚠️', 'Please fill in all fields.');
-        return;
-      }
-
-      /* Simulate login (replace with real API call) */
-      const btn = document.getElementById('loginSubmit');
-      setLoading(btn, true);
-
-      setTimeout(() => {
-        setLoading(btn, false);
-        closeModal();
-        showToast('success', '✓', `Welcome back! Signed in as ${email.split('@')[0]}.`);
-      }, 1500);
-    });
-  }
-
   if (signupForm) {
-    signupForm.addEventListener('submit', e => {
+    signupForm.addEventListener('submit', async e => {
       e.preventDefault();
       userFirstName   = document.getElementById('firstName').value;
       const email     = document.getElementById('signupEmail').value;
@@ -235,15 +247,26 @@
       const btn = document.getElementById('signupSubmit');
       setLoading(btn, true);
 
-      setTimeout(() => {
+      localStorage.setItem('userFirstName', userFirstName);
+
+      /* Real Supabase SignUp */
+      if (supabase) {
+        const { error } = await supabase.auth.signUp({ email, password });
         setLoading(btn, false);
-        switchTab('verify');
-        document.getElementById('verifyText').textContent = `We sent a 6-digit code to ${email}`;
-        /* Focus first digit */
-        const firstDigit = verifyPane.querySelector('.digit-input');
-        if (firstDigit) firstDigit.focus();
-        showToast('info', '📧', `Code sent! (Mock code: 123456)`);
-      }, 1200);
+        if (error) {
+          showToast('error', '❌', error.message);
+        } else {
+          switchTab('verify');
+          showToast('success', '📧', `A real code has been sent to ${email}`);
+        }
+      } else {
+        /* Fallback for Mock */
+        setTimeout(() => {
+          setLoading(btn, false);
+          switchTab('verify');
+          showToast('info', '📧', `Code sent! (Mock mode: 123456)`);
+        }, 1200);
+      }
     });
   }
 
@@ -266,27 +289,36 @@
   });
 
   if (verifySubmit) {
-    verifySubmit.addEventListener('click', () => {
+    verifySubmit.addEventListener('click', async () => {
       let code = '';
       digitInputs.forEach(input => code += input.value);
 
-      if (code.length < 6) {
-        showToast('error', '⚠️', 'Please enter the full 6-digit code.');
-        return;
-      }
+      if (code.length < 6) return;
 
       setLoading(verifySubmit, true);
-      setTimeout(() => {
+
+      if (supabase) {
+        const email = document.getElementById('signupEmail').value;
+        const { error } = await supabase.auth.verifyOtp({ email, token: code, type: 'signup' });
         setLoading(verifySubmit, false);
-        if (code === '123456') {
-          /* Success -> Transition to Onboarding */
+        if (error) {
+          showToast('error', '❌', 'Invalid code. Check your email again.');
+        } else {
           switchTab('onboarding');
           startOnboarding();
-          showToast('success', '🔐', `Identity verified. Let's customise your experience.`);
-        } else {
-          showToast('error', '❌', 'Invalid verification code. Try 123456');
         }
-      }, 1500);
+      } else {
+        /* Fallback Mock Success */
+        setTimeout(() => {
+          setLoading(verifySubmit, false);
+          if (code === '123456') {
+            switchTab('onboarding');
+            startOnboarding();
+          } else {
+            showToast('error', '❌', 'Try 123456 for mock mode');
+          }
+        }, 1000);
+      }
     });
   }
 

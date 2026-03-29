@@ -472,25 +472,41 @@ body.cursor-click .cursor {
   gap: var(--gap-sm);
 }
 
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-sm);
+  margin-top: var(--gap-md);
+}
+
 .social-btn {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--gap-sm);
-  padding: 11px;
+  gap: 8px;
+  padding: 12px 6px;
   border: 1px solid var(--glass-border);
   border-radius: var(--r-md);
   background: var(--glass-fill);
-  color: var(--text-1);
-  font-size: 0.85rem;
+  color: var(--text-2);
+  font-size: 0.7rem;
   font-weight: 500;
   cursor: none;
   transition: all var(--dur-fast) var(--ease);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.social-btn svg {
+  transition: transform var(--dur-fast) var(--ease);
 }
 .social-btn:hover {
-  border-color: var(--glass-border-gold);
-  background: var(--gold-dim);
+  border-color: var(--gold-300);
+  background: rgba(245, 166, 35, 0.05);
   color: var(--text-0);
+}
+.social-btn:hover svg {
+  transform: translateY(-2px);
 }
 
 /* ── Onboarding Specific ───────────────────────────────────────── */
