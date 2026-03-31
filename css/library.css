@@ -1,0 +1,271 @@
+/* ═══════════════════════════════════════════════════════════════
+   ENGINUITY — library.css
+   Specific styles for the Central Archives / Library
+═══════════════════════════════════════════════════════════════ */
+
+/* Reusable Nav Buttons */
+.logout-btn {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-2);
+  background: var(--bg-1);
+  border: 1px solid var(--glass-border);
+  padding: 6px 14px;
+  cursor: none;
+  transition: all 0.3s ease;
+}
+.logout-btn:hover { 
+  color: var(--bg-0); 
+  background: var(--text-0);
+  border-color: var(--text-0);
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px rgba(255, 255, 255, 0.2);
+}
+
+/* Library Layout overrides */
+.library-body {
+  background: var(--bg-0);
+  overflow-x: hidden;
+}
+
+.lib-container {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding-top: 140px;
+}
+
+.lib-header {
+  margin-bottom: var(--gap-lg);
+}
+
+/* ── Discipline Filter Bar ──────────────────────────────────── */
+.discipline-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap-sm);
+  margin-bottom: var(--gap-xl);
+  padding-bottom: var(--gap-lg);
+  border-bottom: 2px solid var(--glass-border);
+}
+
+.filter-btn {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  background: var(--bg-1);
+  border: 1px solid var(--glass-border);
+  padding: 10px 18px;
+  cursor: none;
+  transition: all var(--dur-fast) var(--ease);
+}
+
+.filter-btn:hover {
+  border-color: var(--gold-400);
+  color: var(--gold-200);
+}
+
+.filter-btn.active {
+  background: var(--text-0);
+  color: var(--bg-0);
+  border-color: var(--text-0);
+  box-shadow: 4px 4px 0px rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* ── Content Area & Sections ────────────────────────────────── */
+.lib-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-2xl);
+  padding-bottom: var(--gap-3xl);
+  min-height: 400px; /* prevent layout jump */
+}
+
+.lib-section-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--text-0);
+  margin-bottom: var(--gap-md);
+  display: flex;
+  align-items: center;
+  gap: var(--gap-sm);
+}
+.lib-section-title::before {
+  content: '>';
+  color: var(--gold-300);
+  font-family: var(--font-mono);
+}
+
+/* ── Generic Content Grid (Notes, Papers, Questions) ────────── */
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--gap-lg);
+}
+
+.resource-card {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  background: var(--bg-1);
+  border: 1px solid var(--glass-border);
+  cursor: none;
+  transition: all var(--dur-mid) var(--ease-spring);
+  position: relative;
+  overflow: hidden;
+}
+
+.resource-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--glass-border);
+  transition: background var(--dur-fast) var(--ease);
+}
+
+.resource-card:hover {
+  transform: translateY(-4px) translateX(4px);
+  border-color: var(--text-0);
+  box-shadow: -8px 8px 0px var(--glass-border);
+}
+.resource-card:hover::before {
+  background: var(--gold-300);
+}
+
+.rc-type {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--gold-400);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.rc-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-0);
+  margin-bottom: 12px;
+}
+
+.rc-desc {
+  font-size: 0.85rem;
+  color: var(--text-2);
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.rc-action {
+  align-self: flex-start;
+  font-size: 0.75rem;
+  padding: 8px 16px;
+}
+
+/* ── 3D Brutalist Flashcards (WOW Factor) ───────────────────── */
+.flashcard-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap-xl);
+  perspective: 1200px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.flashcard {
+  width: 340px;
+  height: 220px;
+  position: relative;
+  cursor: none;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.8, -0.2, 0.2, 1.2); /* Brutalist snappy flip */
+}
+
+/* Flipped state */
+.flashcard.flipped {
+  transform: rotateY(180deg) scale(1.05); /* Slight scale adds emphasis */
+}
+
+.fc-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border: 2px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--gap-lg);
+  text-align: center;
+  background: var(--bg-1);
+}
+
+/* Front Face */
+.fc-front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.fc-front:hover {
+  border-color: var(--text-0);
+  box-shadow: 0 0 20px rgba(255,255,255,0.1);
+}
+
+.fc-topic {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--gold-400);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--gap-sm);
+}
+
+.fc-question {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--text-0);
+  font-weight: 700;
+}
+
+/* Back Face */
+.fc-back {
+  transform: rotateY(180deg);
+  background: var(--text-0);
+  border-color: var(--text-0);
+  color: var(--bg-0);
+}
+
+.fc-answer {
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.fc-hint {
+  position: absolute;
+  bottom: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  opacity: 0.5;
+  text-transform: uppercase;
+}
+
+.fc-front .fc-hint { color: var(--text-0); }
+.fc-back .fc-hint { color: var(--bg-0); }
+
+/* Fade transitions for dynamic loading */
+.fade-out {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all var(--dur-fast) var(--ease);
+}
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all var(--dur-mid) var(--ease) 0.1s;
+}

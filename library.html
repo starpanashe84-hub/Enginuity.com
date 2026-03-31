@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archives — Enginuity</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/library.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="library-body">
+  <div class="dash-bg">
+    <canvas id="academicCanvas" style="position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; mix-blend-mode: screen;"></canvas>
+  </div>
+
+  <nav class="nav-dash">
+    <a href="index.html" class="logo">
+      <div class="logo-orb"></div>
+      <span class="logo-text">Enginuity</span>
+    </a>
+    <div style="display:flex; gap: 32px; align-items:center;">
+      <a href="dashboard.html" class="nav-link">DASHBOARD_</a>
+      <a href="library.html" class="nav-link active">ARCHIVES_</a>
+      <button class="logout-btn" id="logoutBtn" style="margin-left: 20px;">[ SIGN_OUT ]</button>
+    </div>
+  </nav>
+
+  <main class="dash-container lib-container">
+    <header class="lib-header">
+      <span class="sec-tag reveal">Database_Active</span>
+      <h1 class="welcome-text hero-title reveal" style="font-size: 3rem;">Central <span class="text-gold">Archives</span>.</h1>
+      <p class="sec-desc reveal" style="margin-left:0; text-align:left; max-width: 600px;">
+        Access institutional knowledge, past papers, node maps, and curated flashcards. Select your discipline to calibrate.
+      </p>
+    </header>
+
+    <!-- Discipline Filter Bar -->
+    <div class="discipline-filters reveal" style="--reveal-delay: 0.1s" id="disciplineFilters">
+      <!-- Injected by JS -->
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="lib-content reveal" style="--reveal-delay: 0.2s" id="libraryContent">
+      <!-- Sections will be injected here. e.g. Notes, Flashcards, Past Papers, Questions -->
+    </div>
+  </main>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <script src="js/academic-particles.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/library.js"></script>
+  <script>
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('userFirstName');
+        window.location.href = 'index.html';
+      });
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) entry.target.classList.add('active');
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

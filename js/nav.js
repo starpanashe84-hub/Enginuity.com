@@ -47,10 +47,17 @@
   /* ─── Smooth scroll for nav links ──────────────────────────── */
   navLinks.forEach(link => {
     link.addEventListener('click', e => {
+      const href = link.getAttribute('href');
+      
+      // If the link is not an anchor tag (e.g. dashboard.html), let normal navigation occur.
+      if (!href || !href.startsWith('#')) {
+          return;
+      }
+      
       e.preventDefault();
-      const href    = link.getAttribute('href');
       const target  = document.querySelector(href);
       if (!target) return;
+      
       const top = target.offsetTop - 70;
       window.scrollTo({ top, behavior: 'smooth' });
 

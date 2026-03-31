@@ -9,13 +9,12 @@
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Roboto+Mono:wght@300;400;500;700&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=VT323&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <!-- Styles -->
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/animations.css" />
   <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/slides.css" />
 </head>
 <body>
 
@@ -41,6 +40,8 @@
         <li><a href="#features"     class="nav-link" data-section="features">Features</a></li>
         <li><a href="#how-it-works" class="nav-link" data-section="how-it-works">How It Works</a></li>
         <li><a href="#community"    class="nav-link" data-section="community">Community</a></li>
+        <li style="margin-left: 20px;"><a href="dashboard.html" class="nav-link text-gold">Dashboard</a></li>
+        <li><a href="library.html" class="nav-link text-gold">Archives</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -273,312 +274,61 @@
     </div>
   </div>
 
-  <!-- ══════════════ HERO ══════════════ -->
-  <section class="hero" id="home">
+  <!-- ══════════════ 3-ACT NARRATIVE ══════════════ -->
+  <main class="scroll-container" id="scrollContainer">
 
-    <!-- Singularity background image -->
-    <div class="hero-bg-img" aria-hidden="true"></div>
+    <!-- Act 1: The WOW Factor Singularity (Inspired by Black Hole Image) -->
+    <section class="slide act-1" id="act1">
+      <!-- 
+        Replace this URL with your exact Black Hole image (e.g., 'assets/blackhole.jpg') 
+        The CSS automatically applies the stark monochrome, high-contrast look and a slow cinematic rotation.
+      -->
+      <div class="act-bg cinematic-bg" style="background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=1920');"></div>
+      
+      <!-- A slick vignette to ensure the text pops -->
+      <div class="hero-vignette"></div>
 
-    <!-- Dark vignette overlay for text readability -->
-    <div class="hero-overlay" aria-hidden="true"></div>
-
-    <!-- Stars canvas -->
-    <canvas class="particle-canvas" id="particleCanvas" aria-hidden="true"></canvas>
-
-    <!-- Centered content -->
-    <div class="hero-center">
-      <div class="mono-badge">
-        <span class="badge-dot-mono"></span>
-        <span>AI-Powered &middot; Community-Driven &middot; Free For Students</span>
+      <div class="act-content center-align">
+        <h1 class="cinematic-title fade-in-up">ENGINUITY</h1>
+        <p class="cinematic-sub fade-in-up delay-1">Where Engineering Meets Infinity.</p>
       </div>
 
-      <h1 class="hero-giant-title">ENGINUITY</h1>
-
-      <p class="hero-tagline">Where Engineering Meets Infinity</p>
-
-      <p class="hero-sub">
-        The personalised learning ecosystem built for engineering students.<br />
-        Conquer complex theory, solve real problems, and grow with a community<br />
-        that truly understands the grind.
-      </p>
-
-      <div class="hero-cta">
-        <button class="btn-primary large" id="heroGetStarted">Start Learning Free</button>
-        <a href="#disciplines" class="btn-outline large" id="heroExplore">
-          <span>⚡</span> Explore Disciplines
-        </a>
+      <div class="scroll-indicator pixel-scroll fade-in-up delay-2">
+        <span>[ INITIATE DESCENT ]</span>
       </div>
+    </section>
 
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-num" data-target="15">0</span><span class="stat-suf">+</span>
-          <span class="stat-lbl">Disciplines</span>
-        </div>
-        <div class="stat-sep"></div>
-        <div class="stat-item">
-          <span class="stat-num" data-target="2500">0</span><span class="stat-suf">+</span>
-          <span class="stat-lbl">Problems</span>
-        </div>
-        <div class="stat-sep"></div>
-        <div class="stat-item">
-          <span class="stat-num" data-target="12000">0</span><span class="stat-suf">+</span>
-          <span class="stat-lbl">Students</span>
-        </div>
+    <!-- Act 2: The Singularity (Inspired by Image 2) -->
+    <section class="slide act-2" id="act2">
+      <div class="act-bg" style="background-image: url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=1920'); filter: grayscale(1) contrast(3);"></div>
+      <!-- Crosshair overlay -->
+      <div class="crosshair-v"></div>
+      <div class="crosshair-h"></div>
+      
+      <div class="act-content center-align">
+        <h2 class="serif-title fade-in-up">Engineering is brutal.</h2>
+        <p class="serif-sub fade-in-up delay-1">We make it possible.</p>
       </div>
-    </div>
+    </section>
 
-    <!-- Scroll Indicator -->
-    <div class="scroll-hint" aria-label="Scroll down">
-      <div class="scroll-line-wrap"><div class="scroll-line"></div></div>
-      <span>Scroll to explore</span>
-    </div>
-  </section>
+    <!-- Act 3: The Power (Inspired by Image 3) -->
+    <section class="slide act-3" id="act3">
+      <div class="act-bg" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1920'); filter: grayscale(1) contrast(2);"></div>
+      <div class="act-content bottom-center">
+        <h2 class="serif-title fade-in-up">Create with no<br>limitations</h2>
+        
+        <div class="pixel-logo fade-in-up delay-1">
+           <div class="px-box"></div>
+           <div class="px-box px-offset"></div>
+           <div class="px-box"></div>
+        </div>
 
-  <!-- ══════════════ MISSION ══════════════ -->
-  <section class="mission" id="about">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="sec-tag">Our Mission</span>
-        <h2>Engineering is brutal.<br /><span class="text-gold">We make it possible.</span></h2>
-        <p class="sec-desc">
-          Enginuity was born from the reality that engineering is among the most demanding academic journeys.
-          We combine AI guidance, curated problems, design tools, and community support — so you don't just survive, you thrive.
-        </p>
+        <button class="btn-primary block-btn fade-in-up delay-2" id="heroGetStarted">Enter Dashboard</button>
       </div>
+    </section>
 
-      <div class="pillars-grid">
-        <div class="pillar-card glass-card reveal">
-          <div class="pillar-icon">🧠</div>
-          <h3>Personalised AI</h3>
-          <p>Your AI tutor adapts to your learning style, identifies knowledge gaps, and builds a custom study plan.</p>
-        </div>
-        <div class="pillar-card glass-card reveal" style="--reveal-delay: 0.1s">
-          <div class="pillar-icon">⚙️</div>
-          <h3>Applied Problems</h3>
-          <p>Over 2,500 real engineering problems across all disciplines with guided step-by-step solutions.</p>
-        </div>
-        <div class="pillar-card glass-card reveal" style="--reveal-delay: 0.2s">
-          <div class="pillar-icon">📐</div>
-          <h3>Design Studio</h3>
-          <p>Built-in calculators, circuit simulators, stress analysers, and free-body diagram tools — all in your browser.</p>
-        </div>
-        <div class="pillar-card glass-card reveal" style="--reveal-delay: 0.3s">
-          <div class="pillar-icon">🤝</div>
-          <h3>Community</h3>
-          <p>Study groups, peer-to-peer learning, expert Q&amp;A sessions, and a global engineering student network.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  </main>
 
-  <!-- ══════════════ DISCIPLINES ══════════════ -->
-  <section class="disciplines" id="disciplines">
-    <div class="disciplines-bg" aria-hidden="true"></div>
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="sec-tag">Disciplines</span>
-        <h2>Every Branch of<br /><span class="text-gold">Engineering</span></h2>
-        <p class="sec-desc">From aerospace to biomedical — curated content, AI guidance, and thousands of problems for every major engineering field.</p>
-      </div>
-      <div class="disciplines-grid" id="disciplinesGrid">
-        <!-- Populated by disciplines.js -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════ FEATURES ══════════════ -->
-  <section class="features" id="features">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="sec-tag">Platform Features</span>
-        <h2>Everything you need<br /><span class="text-gold">to excel</span></h2>
-      </div>
-
-      <div class="features-layout">
-        <!-- Main Feature: AI -->
-        <div class="feat-main glass-card reveal">
-          <div class="feat-visual">
-            <div class="ai-orb">
-              <div class="ai-core"></div>
-              <div class="ai-ring ar1"></div>
-              <div class="ai-ring ar2"></div>
-              <div class="ai-ring ar3"></div>
-              <div class="ai-particle ap1"></div>
-              <div class="ai-particle ap2"></div>
-              <div class="ai-particle ap3"></div>
-              <div class="ai-particle ap4"></div>
-            </div>
-          </div>
-          <div class="feat-text">
-            <span class="feat-badge">Core Feature</span>
-            <h3>🧠 AI Engineering Guide</h3>
-            <p>Your personal AI tutor understands engineering theory at a graduate level. Ask questions, get detailed explanations, request worked examples — available 24/7.</p>
-            <ul class="feat-list">
-              <li>✦ Adaptive difficulty progression</li>
-              <li>✦ Multi-step problem solving walkthroughs</li>
-              <li>✦ Discipline-specific knowledge bases</li>
-              <li>✦ Natural language Q&amp;A explanations</li>
-            </ul>
-            <button class="btn-outline" id="tryAiBtn">Try AI Guide →</button>
-          </div>
-        </div>
-
-        <!-- Side Feature Cards -->
-        <div class="feat-side">
-          <div class="feat-card glass-card reveal" style="--reveal-delay: 0.05s">
-            <div class="feat-card-icon">⚙️</div>
-            <div>
-              <h4>Problem Database</h4>
-              <p>2,500+ curated problems across 15 disciplines with fully worked solutions and difficulty ratings.</p>
-            </div>
-          </div>
-          <div class="feat-card glass-card reveal" style="--reveal-delay: 0.15s">
-            <div class="feat-card-icon">📐</div>
-            <div>
-              <h4>Design Studio</h4>
-              <p>Engineering calculators, circuit builders, stress analysers, and lightweight CAD drawing tools.</p>
-            </div>
-          </div>
-          <div class="feat-card glass-card reveal" style="--reveal-delay: 0.25s">
-            <div class="feat-card-icon">🤝</div>
-            <div>
-              <h4>Study Groups</h4>
-              <p>Form squads, schedule sessions, collaborate on problems, and review each other's work in real time.</p>
-            </div>
-          </div>
-          <div class="feat-card glass-card reveal" style="--reveal-delay: 0.35s">
-            <div class="feat-card-icon">📊</div>
-            <div>
-              <h4>Progress Tracker</h4>
-              <p>Visual dashboards showing your mastery levels, problem streaks, and the areas that need attention.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════ HOW IT WORKS ══════════════ -->
-  <section class="how-it-works" id="how-it-works">
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="sec-tag">The Process</span>
-        <h2>How <span class="text-gold">Enginuity</span> Works</h2>
-      </div>
-
-      <div class="timeline">
-        <div class="timeline-track" aria-hidden="true"></div>
-
-        <div class="timeline-step reveal">
-          <div class="step-num">01</div>
-          <div class="step-card glass-card">
-            <div class="step-icon">🎯</div>
-            <h3>Choose Your Discipline</h3>
-            <p>Select your primary engineering field and sub-topics. Tell us your year of study and current course modules.</p>
-          </div>
-        </div>
-
-        <div class="timeline-step reveal" style="--reveal-delay: 0.12s">
-          <div class="step-num">02</div>
-          <div class="step-card glass-card">
-            <div class="step-icon">🤖</div>
-            <h3>AI Assesses Your Level</h3>
-            <p>A short diagnostic challenge lets our AI map your current knowledge — identifying strengths and pinpointing gaps.</p>
-          </div>
-        </div>
-
-        <div class="timeline-step reveal" style="--reveal-delay: 0.24s">
-          <div class="step-num">03</div>
-          <div class="step-card glass-card">
-            <div class="step-icon">⚡</div>
-            <h3>Solve Guided Problems</h3>
-            <p>Work through problems at your level with step-by-step AI guidance, hints, visual aids, and full solutions.</p>
-          </div>
-        </div>
-
-        <div class="timeline-step reveal" style="--reveal-delay: 0.36s">
-          <div class="step-num">04</div>
-          <div class="step-card glass-card">
-            <div class="step-icon">🚀</div>
-            <h3>Collaborate &amp; Grow</h3>
-            <p>Join the community, compare solutions, ask experts, and watch your engineering confidence compound every day.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════ COMMUNITY ══════════════ -->
-  <section class="community" id="community">
-    <div class="community-bg" aria-hidden="true"></div>
-    <div class="container">
-      <div class="section-head reveal">
-        <span class="sec-tag">Community</span>
-        <h2>Engineers who<br /><span class="text-gold">persevere together</span></h2>
-        <p class="sec-desc">Join thousands of engineering students who have transformed their academic experience with Enginuity.</p>
-      </div>
-
-      <div class="testimonials-grid">
-        <div class="testi-card glass-card reveal">
-          <div class="stars">★★★★★</div>
-          <p class="testi-quote">"The AI guide explained thermodynamics in a way my lecturer never could. I went from barely passing to acing my exams in one semester."</p>
-          <div class="testi-author">
-            <div class="author-av" data-initials="KN" style="--av-hue: 35"></div>
-            <div>
-              <strong>Kwame N.</strong>
-              <span>Mechanical Engineering, Year 3</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="testi-card glass-card reveal" style="--reveal-delay: 0.1s">
-          <div class="stars">★★★★★</div>
-          <p class="testi-quote">"The problem database is incredible. 2,500+ problems with full solutions — it's like the world's best engineering textbook, but actually useful."</p>
-          <div class="testi-author">
-            <div class="author-av" data-initials="SP" style="--av-hue: 200"></div>
-            <div>
-              <strong>Siya P.</strong>
-              <span>Electrical Engineering, Year 2</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="testi-card glass-card reveal" style="--reveal-delay: 0.2s">
-          <div class="stars">★★★★★</div>
-          <p class="testi-quote">"I was about to drop out. Enginuity helped me find a study group and finally understand structural analysis. Now I'm top of my class."</p>
-          <div class="testi-author">
-            <div class="author-av" data-initials="AR" style="--av-hue: 140"></div>
-            <div>
-              <strong>Amara R.</strong>
-              <span>Civil Engineering, Year 4</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════ CTA / JOIN ══════════════ -->
-  <section class="cta-join" id="join">
-    <div class="cta-ambient" aria-hidden="true"></div>
-    <div class="container">
-      <div class="cta-inner reveal">
-        <div class="cta-bh" aria-hidden="true">
-          <div class="cbh-ring cr1"></div>
-          <div class="cbh-ring cr2"></div>
-          <div class="cbh-core"></div>
-          <div class="cbh-flare"></div>
-        </div>
-        <h2>Begin Your<br /><span class="text-gold">Engineering Journey</span></h2>
-        <p>Join 12,000+ engineering students who chose Enginuity.<br />Your potential is limitless — we're here to unlock it.</p>
-        <div class="cta-form">
-          <input type="email" id="ctaEmail" placeholder="Enter your university email..." aria-label="Email address" />
-          <button class="btn-primary" id="ctaSignupBtn">Get Started Free</button>
-        </div>
-        <p class="cta-note">Free for students · No credit card required · Cancel anytime</p>
-      </div>
-    </div>
-  </section>
 
   <!-- ══════════════ FOOTER ══════════════ -->
   <footer class="footer">

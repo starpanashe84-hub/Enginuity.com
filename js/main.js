@@ -75,70 +75,31 @@
   }
 
   /* ════════════════════════════════════════════════════════════
-     SCROLL REVEAL — IntersectionObserver
+     NARRATIVE SCROLL REVEAL (3-ACT PROGRESSION)
   ════════════════════════════════════════════════════════════ */
-  const revealObs = new IntersectionObserver((entries) => {
+  const slideObs = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
+      // Find all fade animations inside this slide
+      const faders = entry.target.querySelectorAll('.fade-in-up');
+      
       if (entry.isIntersecting) {
-        entry.target.classList.add('revealed');
-        revealObs.unobserve(entry.target);
+        // Trigger animations when slide is fully snapped in
+        faders.forEach(el => el.classList.add('visible'));
+      } else {
+        // Reset animations when scrolling away (re-playable experience)
+        faders.forEach(el => el.classList.remove('visible'));
       }
     });
   }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px',
+    threshold: 0.5 // Trigger when slide is 50% visible (snapping will handle the rest)
   });
 
-  function observeReveal() {
-    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+  function observeSlides() {
+    document.querySelectorAll('.slide').forEach(el => slideObs.observe(el));
   }
-
-  /* Expose so disciplines.js can add new cards */
-  window._revealObserver = revealObs;
-
-  /* ════════════════════════════════════════════════════════════
-     ANIMATED STAT COUNTERS
-  ════════════════════════════════════════════════════════════ */
-  const countObs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        animateCounter(entry.target);
-        countObs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
-
-  function animateCounter(el) {
-    const target   = parseInt(el.dataset.target, 10);
-    const duration = 1800;
-    const start    = performance.now();
-
-    function easeOut(t) {
-      return 1 - Math.pow(1 - t, 3);
-    }
-
-    function tick(now) {
-      const elapsed  = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const value    = Math.round(easeOut(progress) * target);
-
-      /* Format with comma separator for large numbers */
-      el.textContent = value >= 1000
-        ? (value / 1000).toFixed(value % 1000 === 0 ? 0 : 1) + 'k'
-        : value;
-
-      if (progress < 1) requestAnimationFrame(tick);
-      else el.textContent = target >= 1000
-        ? (target / 1000).toFixed(0) + 'k'
-        : target;
-    }
-
-    requestAnimationFrame(tick);
-  }
-
-  document.querySelectorAll('.stat-num[data-target]').forEach(el => {
-    countObs.observe(el);
-  });
+  
+  // init
+  observeSlides();
 
   /* ════════════════════════════════════════════════════════════
      AUTH MODAL & PANES
